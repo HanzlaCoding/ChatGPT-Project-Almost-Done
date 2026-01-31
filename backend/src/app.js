@@ -1,32 +1,37 @@
 // Packages
-import express from 'express'
-import cookieParser from 'cookie-parser'
+import express from 'express';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import path from 'path';
+import { fileURLToPath } from 'url'; // 1. Import this
+
+// 2. Define __dirname manually
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Routes
-import userRoutes from './routes/user.routes.js'
-import chatRoutes from './routes/chat.routes.js'
+import userRoutes from './routes/user.routes.js';
+import chatRoutes from './routes/chat.routes.js';
 
-const app = express()
+const app = express();
 
 // Middlewares
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: "https://chatgpt-project-almost-done.onrender.com/",
+    origin: "https://chatgpt-project-almost-done.onrender.com",
     credentials: true
 }));
 
+// Now __dirname will work here
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.use('/api/auth', userRoutes);
 app.use('/api/chat', chatRoutes);
 
-// Wildcard route for handling 404 errors
-app.use('*name', (req, res) => {
+// Wildcard route
+app.use('*', (req, res) => { // Fixed the '*name' syntax to a standard '*'
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
-
 
 export default app;
