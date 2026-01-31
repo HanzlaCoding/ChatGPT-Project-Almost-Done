@@ -24,14 +24,14 @@ app.use(cors({
 }));
 
 // Now __dirname will work here
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
 app.use('/api/auth', userRoutes);
 app.use('/api/chat', chatRoutes);
 
 // Wildcard route
-app.use('*', (req, res) => { // Fixed the '*name' syntax to a standard '*'
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+app.use('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
 export default app;

@@ -1,16 +1,16 @@
 import axios from 'axios';
 
 export const authApi = axios.create({
-    baseURL: 'https://chatgpt-project-almost-done.onrender.com/api/auth',
+    baseURL: '/api/auth',
     withCredentials: true
 })
 
 export const chatApi = axios.create({
-    baseURL: 'https://chatgpt-project-almost-done.onrender.com/api/chat',
+    baseURL: '/api/chat',
     withCredentials: true
 })
 
 export const messageApi = axios.create({
-    baseURL: 'https://chatgpt-project-almost-done.onrender.com/api/chat',
+    baseURL: '/api/chat',
     withCredentials: true
 })
