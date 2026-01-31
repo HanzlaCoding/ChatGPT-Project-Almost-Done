@@ -7,9 +7,9 @@ const connectDb = () => {
     })
 
     connect.then(() => {
-        console.log('Connect to Db'.black.bgYellow);
+
     }).catch((err) => {
-        console.log(`Some error occured: ${err.message}`.red);
+
     })
 }
 

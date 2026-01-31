@@ -27,7 +27,7 @@ const Profile = () => {
     // For now, we'll just toggle edit mode
     setIsEditing(false);
     // You might also want to update localStorage if you were actually changing data
-    console.log("Saved profile:", formData);
+
   };
 
   return (

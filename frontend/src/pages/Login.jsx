@@ -41,7 +41,7 @@ const Login = () => {
 
     try {
       const res = await authApi.post("/login", formData);
-      console.log("Login Success:", res.data);
+
 
       // Store token
       localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -55,7 +55,7 @@ const Login = () => {
         navigate("/");
       }, 1500);
     } catch (err) {
-      console.error(err);
+
       setError(err.response?.data?.message || "Invalid email or password.");
       setIsLoading(false); // Stop loading only on error (keep it running on success for smooth transition)
     }

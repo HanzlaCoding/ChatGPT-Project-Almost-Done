@@ -12,5 +12,5 @@ const server = http.createServer(app);
 initializeSocketIO(server);
 
 server.listen(process.env.PORT, () => {
-    console.log(`🚀 Server and Socket.IO running on port ${process.env.PORT}`.black.bgYellow);
+
 });

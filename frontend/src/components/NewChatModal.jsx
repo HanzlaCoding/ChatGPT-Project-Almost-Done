@@ -25,7 +25,7 @@ const NewChatModal = ({ isOpen, onClose, onCreate }) => {
         title: title,
       });
 
-      console.log(res.data);
+
       
       // 1. Show Success State
       setIsSuccess(true);
@@ -46,7 +46,7 @@ const NewChatModal = ({ isOpen, onClose, onCreate }) => {
       }, 1500);
 
     } catch (err) {
-      console.error(err);
+
       // 4. Set Error Message from Backend or Default
       setError(
         err.response?.data?.message || 

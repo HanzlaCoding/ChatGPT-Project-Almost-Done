@@ -48,7 +48,7 @@ const getChats = async (req, res) => {
 const getMessages = async (req, res) => {
     const { _id } = req.user;
 
-    console.log(_id);
+
 
     const messages = await messageModel.find({ user: _id });
 

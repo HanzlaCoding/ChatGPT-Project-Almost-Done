@@ -12,12 +12,12 @@ const index = pc.index(`${process.env.PINECONE_INDEX_NAME}`);
 
 async function upsertData(text, userId, chatId, msgIid, role) {
     try {
-        console.log(`Generating embedding for: ${text}...`);
+
 
         // 1. Text ka vector generate karein
         const vector = await getEmbedding(text);
 
-        console.log(`Upserting to Pinecone...`, vector);
+
 
         await index.upsert([
             {
@@ -33,11 +33,11 @@ async function upsertData(text, userId, chatId, msgIid, role) {
             },
         ]);
 
-        console.log("Upsert successful!");
+
         return { success: true, message: "Data saved successfully" };
 
     } catch (error) {
-        console.error("Upsert Error:", error);
+
         throw error;
     }
 }
@@ -59,7 +59,7 @@ async function queryData(queryText) {
 
         return queryResponse.matches;
     } catch (error) {
-        console.error("Query Error:", error);
+
         throw error;
     }
 }

@@ -6,18 +6,20 @@ import NewChatModal from "@/components/NewChatModal";
 import Sidebar from "@/components/Sidebar";
 import ChatArea from "@/components/ChatArea";
 import ChatInput from "@/components/ChatInput";
+import { Menu } from "lucide-react";
 
 const Home = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isNewChatModalOpen, setIsNewChatModalOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
   const user = JSON?.parse(localStorage.getItem("user") || "{}");
   const [chats, setChats] = useState(null);
   const token = JSON.parse(localStorage.getItem("token") || "{}");
-  console.log("Token from Home:", token);
+
   const [err, setErr] = useState("")
 
   if (err.status == 401) {
@@ -33,23 +35,23 @@ const Home = () => {
   const fetchChats = async () => {
     await chatApi.get(
       `/getChats?userId=${user._id}`).then((res) => {
-        console.log(res.data);
+
         setChats(res.data.chats)
       })
       .catch((err) => {
         setErr(err)
-        console.log(`Some error occur: ${err}`);
+
       })
   };
 
   useEffect(() => {
     messageApi.get('/getMessages')
       .then((res) => {
-        console.log(res.data);
+
         setMessages(res.data.messages)
       })
       .catch((err) => {
-        return console.log(`Some error occur ${err.message}`);
+        return;
       })
   },[])
 
@@ -71,17 +73,17 @@ const Home = () => {
     });
 
     socketRef.current.on("connect", () => {
-      console.log("Connected with ID:", socketRef.current.id);
+
     });
 
     socketRef.current.on("connect_error", (err) => {
-      console.log("Connection Error:", err.message);
+
     });
 
     return () => {
       if (socketRef.current) {
         socketRef.current.disconnect();
-        console.log("Socket Disconnected");
+
       }
     };
 
@@ -92,7 +94,7 @@ const Home = () => {
 
     // Server se message aane par kya karna hai
     const handleIncomingMessage = (data) => {
-      console.log("AI ka jawab aaya:", data);
+
 
       // AI ka message list mein add karein
       // Note: Backend se 'data' object aa raha hai ya string, wo check kar lein
@@ -152,10 +154,24 @@ const Home = () => {
         onNewChat={() => setIsNewChatModalOpen(true)}
         onLogout={logOut}
         onNavigate={navigate}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col relative w-full h-full bg-white">
+        
+        {/* Mobile Header */}
+        <div className="md:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100 z-30">
+          <button 
+            onClick={() => setIsSidebarOpen(true)}
+            className="p-2 -ml-2 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-100"
+          >
+            <Menu size={24} />
+          </button>
+          <span className="font-heading font-bold text-lg text-gray-900">Nexus</span>
+          <div className="w-8" /> {/* Spacer for centering */}
+        </div>
         {/* Content Body */}
         <div className="flex-1 flex flex-col relative overflow-hidden">
           <ChatArea
@@ -179,7 +195,7 @@ const Home = () => {
         onClose={() => setIsNewChatModalOpen(false)}
         onCreate={(title) => {
           setMessages([]);
-          console.log("New chat created:", title);
+
         }}
       />
     </div>

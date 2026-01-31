@@ -57,14 +57,14 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      console.log("Submitting:", formData);
+
       const res = await authApi.post("/register", formData, {
         withCredentials: true,
       });
       // Optional: Show success message or redirect immediately
       navigate("/login");
     } catch (err) {
-      console.error(err);
+
       setError(
         err.response?.data?.message || "Something went wrong. Please try again."
       );

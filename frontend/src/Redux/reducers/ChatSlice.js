@@ -13,7 +13,7 @@ const chatSlice = createSlice({
         activeChatId: (state, action) => {
             // TODO: Implement logic to set the active chat ID
             state[0].activeChatId = action.payload
-            console.log(state[0].activeChatId)
+
         }
     }
 })
