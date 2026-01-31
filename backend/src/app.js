@@ -30,7 +30,7 @@ app.use('/api/auth', userRoutes);
 app.use('/api/chat', chatRoutes);
 
 // Wildcard route
-app.use('*', (req, res) => {
+app.use((req, res) => {
     res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
