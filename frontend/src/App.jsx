@@ -5,10 +5,12 @@ import Home from "@/pages/Home";
 import Profile from "@/pages/Profile";
 import PublicRoute from "./utils/PublicRoute";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import AxiosInterceptor from "./components/AxiosInterceptor";
 
 function App() {
   return (
     <Routes>
+      <Route element={<AxiosInterceptor />} /> {/* Mount interceptor */}
       <Route
         path="/login"
         element={
